@@ -1,0 +1,30 @@
+### test GET request
+GET http://127.0.0.1:8000/property_app/properties/
+
+### test POST request
+POST http://127.0.0.1:8000/property_app/properties/
+Content-Type: application/json
+
+ {
+    "id": 2,
+    "name": "Adella",
+    "address": "Kagarama",
+    "type": "apartment",
+    "description": "Girls Hostels",
+    "number_of_units": 20000
+  }
+
+### test PUT request
+PUT http://127.0.0.1:8000/property_app/properties/2/
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Adella",
+  "address": "Nyarugenge",
+  "type": "apartment",
+  "description": "Girls Hostel",
+  "number_of_units": 25000
+}
+### test DELETE request
+DELETE http://127.0.0.1:8000/property_app/properties/2/

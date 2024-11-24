@@ -1,21 +1,22 @@
 from rest_framework import serializers
-
-from property_app.models import Property, Units, Tenant, Lease, User
+from .models import*
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'email']
 
 
 class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        fields = ['id', 'name', 'address', 'type', 'description', 'number_of_units']
+        fields = '__all__'
 
 
-class UnitsSerializer(serializers.ModelSerializer):
+class UnitSerializer(serializers.ModelSerializer):
+    property = PropertySerializer(read_only=True)
+
     class Meta:
         model = Units
         fields = '__all__'
@@ -28,6 +29,9 @@ class TenantSerializer(serializers.ModelSerializer):
 
 
 class LeaseSerializer(serializers.ModelSerializer):
+    tenant = TenantSerializer(read_only=True)
+    unit = UnitSerializer(read_only=True)
+
     class Meta:
         model = Lease
         fields = '__all__'

@@ -5,9 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     pass
 
-    def __str__(self):
+    def _str_(self):
         return self.username
-
 
 property_type=[
     ('apartment', 'Apartment'),
@@ -16,11 +15,10 @@ property_type=[
     ("Land", "Land"),
 ]
 
-
 class Property(models.Model):
     name = models.CharField(max_length=200)
     address=models.CharField(max_length=200)
-    type=models.CharField(max_length=20, choices=property_type)
+    type=models.CharField(max_length=20,choices=property_type)
     description=models.TextField(max_length=200)
     number_of_units=models.IntegerField()
 
@@ -29,7 +27,7 @@ class Property(models.Model):
 
 
 class Units(models.Model):
-    property=models.ForeignKey(Property, on_delete=models.CASCADE)
+    property=models.ForeignKey(Property,on_delete=models.CASCADE)
     unit_number=models.CharField(max_length=100)
     bedrooms=models.IntegerField()
     bathrooms=models.IntegerField()
@@ -39,7 +37,6 @@ class Units(models.Model):
     def __str__(self):
         return f"{self.unit_number} -- {self.property.name}"
 
-
 class Tenant(models.Model):
     name=models.CharField(max_length=200)
     email=models.EmailField()
@@ -48,13 +45,13 @@ class Tenant(models.Model):
     def __str__(self):
         return self.name
 
-
 class Lease(models.Model):
     tenant=models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    unit=models.ForeignKey(Units, on_delete=models.CASCADE)
+    unit=models.ForeignKey(Units ,on_delete=models.CASCADE)
     start_date=models.DateField()
     end_date=models.DateField()
     rent_amount=models.IntegerField()
 
     def __str__(self):
         return f"{self.tenant.name}'s lease"
+

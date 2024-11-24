@@ -1,8 +1,11 @@
 from django.urls import path
-from property_app import views
-from property_app.views import *
+from .import views
 
-urlpatterns = [
-    path('property/', views.property_serializer, name='property-serializer'),
-    path('tenant/', tenant_serializer, name='tenant-serializer'),
+
+
+urlpatterns=[
+    path("properties/",views.property_list),
+    path("units/",views.unit_list),
+    path("tenants/",views.tenant_list),
+    path("leases/",views.lease_list),
 ]
